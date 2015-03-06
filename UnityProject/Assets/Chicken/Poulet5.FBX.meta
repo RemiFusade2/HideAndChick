@@ -1,0 +1,809 @@
+fileFormatVersion: 2
+guid: 2fac7b3ea323f8d4c83139677c0c49f8
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: AileDroite
+    100002: AileGauche
+    100004: Base
+    100006: Bec
+    100008: BoneQueue
+    100010: BrasDroit
+    100012: BrasGauche
+    100014: Cone001
+    100016: Cone002
+    100018: Corps
+    100020: Corps 1
+    100022: Crete1
+    100024: Crete2
+    100026: OeilDroit
+    100028: OeilGauche
+    100030: //RootNode
+    100032: Queue
+    100034: Sphere001
+    400000: AileDroite
+    400002: AileGauche
+    400004: Base
+    400006: Bec
+    400008: BoneQueue
+    400010: BrasDroit
+    400012: BrasGauche
+    400014: Cone001
+    400016: Cone002
+    400018: Corps
+    400020: Corps 1
+    400022: Crete1
+    400024: Crete2
+    400026: OeilDroit
+    400028: OeilGauche
+    400030: //RootNode
+    400032: Queue
+    400034: Sphere001
+    2300000: Sphere001
+    3300000: Sphere001
+    4300000: Sphere001
+    4300002: Corps
+    4300004: Crete1
+    4300006: Crete2
+    4300008: OeilDroit
+    4300010: OeilGauche
+    4300012: Bec
+    4300014: Cone001
+    4300016: Cone002
+    7400000: Idle2
+    7400002: Idle1
+    7400004: JumpBegin
+    7400006: JumpLoop
+    7400008: JumpEnd
+    7400010: WalkBegin
+    7400012: WalkLoop
+    7400014: WalkEnd
+    7400016: MoveAndJumpBegin
+    7400018: MoveAndJumpLoop
+    7400020: MoveAndJumpEnd
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Bec
+    13700002: Cone001
+    13700004: Cone002
+    13700006: Corps
+    13700008: Crete1
+    13700010: Crete2
+    13700012: OeilDroit
+    13700014: OeilGauche
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle1
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Idle2
+      takeName: Take 001
+      firstFrame: 20
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: JumpBegin
+      takeName: Take 001
+      firstFrame: 40
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: JumpLoop
+      takeName: Take 001
+      firstFrame: 60
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: JumpEnd
+      takeName: Take 001
+      firstFrame: 80
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkBegin
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkLoop
+      takeName: Take 001
+      firstFrame: 120
+      lastFrame: 128
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: WalkEnd
+      takeName: Take 001
+      firstFrame: 128
+      lastFrame: 155
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MoveAndJumpBegin
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 180
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MoveAndJumpLoop
+      takeName: Take 001
+      firstFrame: 180
+      lastFrame: 187
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 1
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: MoveAndJumpEnd
+      takeName: Take 001
+      firstFrame: 188
+      lastFrame: 215
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Corps 1
+        weight: 1
+      - path: Base/Corps 1/BoneQueue
+        weight: 1
+      - path: Base/Corps 1/BoneQueue/Queue
+        weight: 1
+      - path: Base/Corps 1/BrasDroit
+        weight: 1
+      - path: Base/Corps 1/BrasDroit/AileDroite
+        weight: 1
+      - path: Base/Corps 1/BrasGauche
+        weight: 1
+      - path: Base/Corps 1/BrasGauche/AileGauche
+        weight: 1
+      - path: Bec
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cone002
+        weight: 1
+      - path: Corps
+        weight: 1
+      - path: Crete1
+        weight: 1
+      - path: Crete2
+        weight: 1
+      - path: OeilDroit
+        weight: 1
+      - path: OeilGauche
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
