@@ -77,7 +77,7 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			meshscript = GameObject.Find("TitleMesh").GetComponent<TextMeshPro>();
 			c = new Color32(255,255,0,0);
 			meshscript.color = c;
-			meshscript = GameObject.Find("CreatedTExt").GetComponent<TextMeshPro>();
+			meshscript = GameObject.Find("CreatedText").GetComponent<TextMeshPro>();
 			c = new Color32(255,255,255,0);
 			meshscript.color = c;
 		}
@@ -132,6 +132,9 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			{
 				ENJMINAlpha = 255;
 			}
+			TextMeshPro meshscript = GameObject.Find("CreatedText").GetComponent<TextMeshPro>();
+			c = new Color32(255,255,255,255);
+			meshscript.color = c;
 		}
 
 

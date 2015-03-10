@@ -55,6 +55,7 @@
      <Compile Include="Assets\Chicken\Scripts\PoulaillerScript.cs" />
      <Compile Include="Assets\Chicken\TitleChickenBehaviour.cs" />
      <Compile Include="Assets\Elevator\ElevatorBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SoundButtonBehaviour.cs" />
      <Compile Include="Assets\Scripts\WaterCollisionBehaviour.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples\Scripts\Benchmark02.cs" />

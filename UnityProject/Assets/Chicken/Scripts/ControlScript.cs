@@ -5,14 +5,16 @@ using TMPro;
 
 public class ControlScript : MonoBehaviour {
 
-	public float speed = 5;
-	public float jumpHeight = 5;
+	public float speed;
+	public float jumpHeight;
 
 	private List<GameObject> attachedChickens;
 
 	private Transform corps;
 
 	private float jumpTimer;
+
+	private float lastMovementTimer;
 
 	public void AddChicken(GameObject chicken)
 	{
@@ -119,29 +121,40 @@ public class ControlScript : MonoBehaviour {
 		// check objects and init
 		FindCorps ();
 
-		// Debug
-		UpdateText ();
+		// Texts for trailer
+		// UpdateText ();
 
 		// Get input for movement
 		Vector3 wantedMovementDirection = Vector3.zero;
-		if (Input.GetKey(KeyCode.UpArrow))
+		if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Z))
 		{
 			wantedMovementDirection += Vector3.forward;
 		}
-		if (Input.GetKey(KeyCode.DownArrow))
+		if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
 		{
 			wantedMovementDirection += Vector3.back;
 		}
-		if (Input.GetKey(KeyCode.RightArrow))
+		if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
 		{
 			wantedMovementDirection += Vector3.right;
 		}
-		if (Input.GetKey(KeyCode.LeftArrow))
+		if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.Q))
 		{
 			wantedMovementDirection += Vector3.left;
 		}
 		Vector3 actualMovementDirection = Vector3.zero;
 		
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			this.transform.Find("TwitterAudio").audio.Stop();
+			this.transform.Find("TwitterAudio").audio.Play();
+			this.GetComponent<Animator>().SetBool("twiterring", true);
+		}
+		else
+		{
+			this.GetComponent<Animator>().SetBool("twiterring", false);
+		}
+
 		RaycastHit resultingHit;
 		if (wantedMovementDirection.magnitude > 0)
 		{
@@ -158,8 +171,8 @@ public class ControlScript : MonoBehaviour {
 				{
 					// The ray hit the ground
 					float slopeAngle = Mathf.Deg2Rad * Vector3.Angle(Vector3.up, resultingHit.normal);
-					float slopeRayHeight = 0.5f;
-					float radius = Mathf.Abs(slopeRayHeight / Mathf.Sin (slopeAngle));
+					//float slopeRayHeight = 0.5f;
+					//float radius = Mathf.Abs(slopeRayHeight / Mathf.Sin (slopeAngle));
 					float steepSlopeAngle = 45;
 					if (slopeAngle >= steepSlopeAngle * Mathf.Deg2Rad)
 					{
@@ -184,12 +197,13 @@ public class ControlScript : MonoBehaviour {
 			{
 				this.GetComponent<Animator>().SetBool("jumping", false);
 				this.transform.Find("JumpAudio").audio.Stop();
-				if (slopeAngle < 45 && Input.GetKeyDown(KeyCode.Space))
+				if (slopeAngle < 50 && Input.GetKeyDown(KeyCode.Space))
 				{
 					jump = Vector3.up;
 					this.transform.Find("JumpAudio").audio.Play();
 					this.GetComponent<Animator>().SetBool("jumping", true);
 					jumpTimer = Time.time;
+					lastMovementTimer = Time.time;
 				}
 
 			}
@@ -208,8 +222,16 @@ public class ControlScript : MonoBehaviour {
 		{
 			// Rotate to face wanted movement direction
 			Vector3 directionLook = new Vector3(wantedMovementDirection.x, 0, wantedMovementDirection.z);
-			corps.LookAt(corps.position + directionLook);
+			corps.LookAt(corps.position + directionLook.normalized);
+			lastMovementTimer = Time.time;
 		}
 		this.GetComponent<Animator>().SetBool("walking", (wantedMovementDirection.magnitude > 0));
+
+		// Idle animation
+		this.GetComponent<Animator>().SetFloat("waiting", Time.time - lastMovementTimer);
+		if (Time.time - lastMovementTimer > 5)
+		{
+			lastMovementTimer = Time.time;
+		}
 	}
 }

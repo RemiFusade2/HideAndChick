@@ -46,6 +46,7 @@ public class ChickenScript : MonoBehaviour {
 		{
 			this.transform.LookAt (target.transform.position);
 		}
+
 	}
 	
 	void OnCollisionEnter(Collision col)

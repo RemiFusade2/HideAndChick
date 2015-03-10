@@ -5,12 +5,11 @@ using TMPro;
 public class PoulaillerScript : MonoBehaviour {
 
 	int pouletsRecuperes;
-	int pouletsTotal;
+	public int pouletsTotal;
 
 	// Use this for initialization
 	void Start () {
 		pouletsRecuperes = 0;
-		pouletsTotal = 20;
 		UpdateRemainingChicksText();
 	}
 	
