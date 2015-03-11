@@ -29,17 +29,17 @@ public class TitleChickenBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Time.time > timer + 60)
+		if (Time.time > timer + 58)
 		{
 			Destroy(this.gameObject);
 		}
-		else if (Time.time > timer + 32)
+		/*else if (Time.time > timer + 30)
 		{
 			TextMeshPro meshscript = GameObject.Find("OpenWorldText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,255);
 			meshscript.color = c;
 		}
-		else if (Time.time > timer + 31)
+		else if (Time.time > timer + 29)
 		{
 			TextMeshPro meshscript = GameObject.Find("SecretsText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,0);
@@ -51,13 +51,13 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			c = new Color32(255,255,255,0);
 			meshscript.color = c;
 		}
-		else if (Time.time > timer + 28)
+		else if (Time.time > timer + 26)
 		{
 			TextMeshPro meshscript = GameObject.Find("SecretsText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,255);
 			meshscript.color = c;
 		}
-		else if (Time.time > timer + 26)
+		else if (Time.time > timer + 24)
 		{
 			TextMeshPro meshscript = GameObject.Find("LDText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,0);
@@ -65,8 +65,8 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			meshscript = GameObject.Find("ExploreText").GetComponent<TextMeshPro>();
 			c = new Color32(255,255,255,255);
 			meshscript.color = c;
-		}
-		else if (Time.time > timer + 20)
+		}*/
+		else if (Time.time > timer + 25.5f)
 		{
 			TextMeshPro meshscript = GameObject.Find("FindingChicksText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,0);
@@ -81,7 +81,7 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			c = new Color32(255,255,255,0);
 			meshscript.color = c;
 		}
-		else if (Time.time > timer + 15)
+		else if (Time.time > timer + 13)
 		{
 			TextMeshPro meshscript = GameObject.Find("FindingChicksText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,255);
@@ -96,7 +96,7 @@ public class TitleChickenBehaviour : MonoBehaviour {
 		{
 			this.rigidbody.useGravity = true;
 			this.rigidbody.velocity = new Vector3 (initSpeedX, initSpeedY, initSpeedZ);
-			this.rigidbody.angularVelocity = new Vector3 (100, 0, 0);
+			//this.rigidbody.angularVelocity = new Vector3 (0, 100, 0);
 		}
 		else if (Time.time > timer + TitleFadeInTime)
 		{

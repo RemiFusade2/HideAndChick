@@ -58,61 +58,72 @@ public class ControlScript : MonoBehaviour {
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
 			textScript.text = "";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad1))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
 			textScript.text = "Open the door";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad2))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Find the chicks";
+			textScript.text = "Play as a chicken";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad3))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Bring them home";
+			textScript.text = "Play as a straight white male chicken";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad4))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Play as a straight white male chicken";
+			textScript.text = "Find the chicks";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad5))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Use physics";
+			textScript.text = "Find ALL the chicks!";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad6))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Find ALL the chicks!";
+			textScript.text = "Pick up the chicks!";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad7))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Walk on lava!";
+			textScript.text = "Bring them home";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad8))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
 			textScript.text = "Find secret paths";
+			textScript.renderer.castShadows = false;
 		}
 		if (Input.GetKey(KeyCode.Keypad9))
 		{
 			GameObject text = GameObject.Find("InfoText");
 			TextMeshPro textScript = text.GetComponent<TextMeshPro>();
-			textScript.text = "Play as a chicken";
+			textScript.text = "Walk on lava!";
+			textScript.renderer.castShadows = false;
 		}
+
 	}
 
 	// Update is called once per frame
@@ -122,7 +133,7 @@ public class ControlScript : MonoBehaviour {
 		FindCorps ();
 
 		// Texts for trailer
-		// UpdateText ();
+		UpdateText ();
 
 		// Get input for movement
 		Vector3 wantedMovementDirection = Vector3.zero;
