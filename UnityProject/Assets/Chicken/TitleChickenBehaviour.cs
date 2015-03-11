@@ -66,7 +66,7 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			c = new Color32(255,255,255,255);
 			meshscript.color = c;
 		}*/
-		else if (Time.time > timer + 25.5f)
+		else if (Time.time > timer + 24.5f)
 		{
 			TextMeshPro meshscript = GameObject.Find("FindingChicksText").GetComponent<TextMeshPro>();
 			Color32 c = new Color32(255,255,255,0);
@@ -108,6 +108,9 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			{
 				TitleAlpha = 255;
 			}
+			TextMeshPro textmeshscript = GameObject.Find("ENJMINPresents").GetComponent<TextMeshPro>();
+			c = new Color32(205,30,55,0);
+			textmeshscript.color = c;
 		}
 		else if (Time.time > timer + ENJMINFadeOutTime)
 		{
