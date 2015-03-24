@@ -1,20 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TMPro;
+using System.Collections.Generic;
 
 public class PoulaillerScript : MonoBehaviour {
 
-	int pouletsRecuperes;
+	int pouletsRecuperes = 0;
 	public int pouletsTotal;
 
-	// Use this for initialization
-	void Start () {
-		pouletsRecuperes = 0;
+	public List<GameObject> objectsToHideAfterEnd;
+	public List<GameObject> objectsToShowAfterEnd;
+
+	public List<GameObject> objectsFRToShowAfterEnd;
+	public List<GameObject> objectsENToShowAfterEnd;
+
+	public Material skyboxToShowAfterEnd;
+
+	public string language;
+
+	public int GetPouletsRecuperes()
+	{
+		return pouletsRecuperes;
+	}
+	public void SetPouletsRecuperes(int poulets)
+	{
+		pouletsRecuperes = poulets;
 		UpdateRemainingChicksText();
+	}
+
+	// Use this for initialization
+	void Start () 
+	{
+		//UpdateRemainingChicksText();
 	}
 	
 	// Update is called once per frame
-	void Update () {		
+	void Update () 
+	{
+		DebugChicksCountChange ();
+	}
+
+	void DebugChicksCountChange()
+	{		
 		if (Input.GetKeyDown(KeyCode.KeypadPlus))
 		{
 			pouletsRecuperes++;
@@ -51,25 +78,78 @@ public class PoulaillerScript : MonoBehaviour {
 			pouletsRecuperes += count;
 			this.transform.Find("Validation").audio.Play();
 			UpdateRemainingChicksText();
+			CheckForEnding();
 		}
 	}
 
-	void UpdateRemainingChicksText()
+	public void UpdateRemainingChicksText()
 	{
 		int pouletsRestants = pouletsTotal - pouletsRecuperes;
 		GameObject remainingChicksText = GameObject.Find("Maison/RemainingChicksText");
 		TextMeshPro textScript = remainingChicksText.GetComponent<TextMeshPro>();
 		if (pouletsRestants <= 0)
 		{
-			textScript.text = "Congratulations! You found all the chicks!";
+			if (language == "FR")
+			{
+				textScript.text = "Felicitations! Tu as trouve tous les poussins!";
+			}
+			else
+			{
+				textScript.text = "Congratulations! You found all the chicks!";
+			}
 		} 
 		else if (pouletsRestants == 1)
 		{
-			textScript.text = "One remaining chick!";
+			if (language == "FR")
+			{
+				textScript.text = "Plus qu'un poussin a trouver!";
+			}
+			else
+			{
+				textScript.text = "One remaining chick!";
+			}
 		}
 		else
 		{
-			textScript.text = "Remaining chicks: " + pouletsRestants;
+			if (language == "FR")
+			{
+				textScript.text = "Poussins restants: " + pouletsRestants;
+			}
+			else
+			{
+				textScript.text = "Remaining chicks: " + pouletsRestants;
+			}
 		}
+	}
+
+	void CheckForEnding()
+	{
+		if (pouletsRecuperes >= pouletsTotal)
+		{
+			foreach (GameObject obj in this.objectsToHideAfterEnd)
+			{
+				obj.SetActive(false);
+			}
+			foreach (GameObject obj in this.objectsToShowAfterEnd)
+			{
+				obj.SetActive(true);
+			}
+			if (language == "FR")
+			{
+				foreach (GameObject obj in this.objectsFRToShowAfterEnd)
+				{
+					obj.SetActive(true);
+				}
+			}
+			else
+			{
+				foreach (GameObject obj in this.objectsENToShowAfterEnd)
+				{
+					obj.SetActive(true);
+				}
+			}
+		}
+		RenderSettings.skybox = skyboxToShowAfterEnd;
+		RenderSettings.fog = false;
 	}
 }

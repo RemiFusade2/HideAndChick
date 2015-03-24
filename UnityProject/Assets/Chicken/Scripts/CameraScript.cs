@@ -8,14 +8,16 @@ public class CameraScript : MonoBehaviour {
 
 	private float zoom;
 
-	public float initialZoom = 0.3f;
-	public float step = 0.03f;
+	public float initialZoom;
+	public float step;
+
+	public GameObject player;
 
 
 	// Use this for initialization
 	void Start () {
 		zoom = initialZoom;
-		UpdatePositionFromZoom();
+		UpdatePosition();
 	}
 	
 	// Update is called once per frame
@@ -39,12 +41,13 @@ public class CameraScript : MonoBehaviour {
 					zoom = 0;
 				}
 			}
-			UpdatePositionFromZoom();
 		}
+		UpdatePosition ();
 	}
 
-	void UpdatePositionFromZoom()
+	void UpdatePosition()
 	{
-		this.camera.transform.localPosition = Vector3.Slerp (closePosition, farPosition, zoom);
+		Vector3 playerPosition = player.transform.position;
+		this.camera.transform.localPosition = playerPosition + Vector3.Slerp (closePosition, farPosition, zoom);
 	}
 }

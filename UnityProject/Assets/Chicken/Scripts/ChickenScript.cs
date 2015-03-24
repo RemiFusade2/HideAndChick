@@ -3,21 +3,24 @@ using System.Collections;
 
 public class ChickenScript : MonoBehaviour {
 	
-	GameObject target;
+	GameObject target = null;
 	bool attached;
+
+	private float lastTwitteringTimer;
 
 	// Use this for initialization
 	void Start () 
 	{
-		target = null;
 		this.GetComponent<Animator>().SetBool("walking", false);
 		this.GetComponent<Animator>().SetBool("jumping", false);
 		attached = false;
+		lastTwitteringTimer = 0;
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
+		//this.GetComponent<Animator>().SetBool("twiterring", false);
 		// Chicken wants to move
 		Vector3 wantedMovementDirection = new Vector3(this.rigidbody.velocity.x, 0, this.rigidbody.velocity.z);
 		// Check terrain (wall, slope, etc)
@@ -47,6 +50,10 @@ public class ChickenScript : MonoBehaviour {
 			this.transform.LookAt (target.transform.position);
 		}
 
+		if (Time.time > lastTwitteringTimer+0.5f)
+		{
+			this.GetComponent<Animator>().SetBool("twiterring", false);
+		}
 	}
 	
 	void OnCollisionEnter(Collision col)
@@ -88,5 +95,28 @@ public class ChickenScript : MonoBehaviour {
 			Destroy (joint);
 		}
 		return count;
+	}
+
+	public bool HasBeenFound()
+	{
+		return (target != null) && !attached;
+	}
+
+	public void SetFound(GameObject player, Vector3 pos)
+	{
+		target = player;
+		attached = false;
+		this.transform.position = pos;
+	}
+
+	void OnMouseDown()
+	{
+		if (Time.time > lastTwitteringTimer+0.5f)
+		{
+			this.transform.Find("ValidationAudioCrow").audio.Stop();
+			this.transform.Find("ValidationAudioCrow").audio.Play();
+			this.GetComponent<Animator>().SetBool("twiterring", true);
+			lastTwitteringTimer = Time.time;
+		}
 	}
 }
