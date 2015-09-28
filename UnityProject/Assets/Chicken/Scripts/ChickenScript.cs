@@ -8,6 +8,10 @@ public class ChickenScript : MonoBehaviour {
 
 	private float lastTwitteringTimer;
 
+	private bool hasBeenCounted;
+
+	private GameObject player;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -15,16 +19,29 @@ public class ChickenScript : MonoBehaviour {
 		this.GetComponent<Animator>().SetBool("jumping", false);
 		attached = false;
 		lastTwitteringTimer = 0;
+		hasBeenCounted = false;
+		player = null;
+	}
+
+	private void InitPlayerGameObject()
+	{
+		if (player == null)
+		{
+			player = GameObject.Find ("Player");
+		}
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
+		InitPlayerGameObject ();
+
+
 		//this.GetComponent<Animator>().SetBool("twiterring", false);
 		// Chicken wants to move
-		Vector3 wantedMovementDirection = new Vector3(this.rigidbody.velocity.x, 0, this.rigidbody.velocity.z);
+		Vector3 wantedMovementDirection = new Vector3(this.GetComponent<Rigidbody>().velocity.x, 0, this.GetComponent<Rigidbody>().velocity.z);
 		// Check terrain (wall, slope, etc)
-		Ray rayToWantedDirection = new Ray (this.rigidbody.position, wantedMovementDirection);
+		Ray rayToWantedDirection = new Ray (this.GetComponent<Rigidbody>().position, wantedMovementDirection);
 		RaycastHit resultingHit;
 		float rayLength = 2;
 		if (Physics.Raycast(rayToWantedDirection, out resultingHit, rayLength))
@@ -41,7 +58,7 @@ public class ChickenScript : MonoBehaviour {
 				if (slopeAngle >= steepSlopeAngle * Mathf.Deg2Rad)
 				{
 					// We are near a steep slope: don't authorize move!
-					this.rigidbody.velocity = Vector3.zero;
+					this.GetComponent<Rigidbody>().velocity = Vector3.zero;
 				}
 			}
 		}
@@ -53,6 +70,13 @@ public class ChickenScript : MonoBehaviour {
 		if (Time.time > lastTwitteringTimer+0.5f)
 		{
 			this.GetComponent<Animator>().SetBool("twiterring", false);
+		}
+
+		float magnitude = this.GetComponent<Rigidbody> ().velocity.magnitude;
+		float maxMagnitude = 50.0f;
+		if (magnitude > maxMagnitude)
+		{
+			this.GetComponent<Rigidbody> ().velocity = this.GetComponent<Rigidbody> ().velocity * (maxMagnitude / magnitude);
 		}
 	}
 	
@@ -68,19 +92,23 @@ public class ChickenScript : MonoBehaviour {
 
 	void CollideWithObject(GameObject col)
 	{
-		if (col != null && (col.tag == "Poulet" || col.tag == "Player") && target == null)
+		if (col != null && (col.tag == "Poulet" || col.tag == "Player") && target == null && !hasBeenCounted)
 		{
-			target = col.gameObject;
+			//target = col.gameObject;
+			target = player.gameObject;
 			this.GetComponent<Animator>().SetBool("walking", true);
 			SpringJoint joint = this.gameObject.AddComponent<SpringJoint>();
-			joint.connectedBody = target.rigidbody;
-			joint.spring = 400f;
+			joint.connectedBody = target.GetComponent<Rigidbody>();
+			joint.connectedAnchor = Vector3.up;
+			joint.spring = 100;
 			//joint.breakForce = 10f;
-			joint.minDistance = 0;
-			joint.maxDistance = 0.2f;
+			joint.minDistance = 0.5f;
+			joint.maxDistance = 0.5f;
+			joint.damper = 0.1f;
+			joint.enableCollision = true;
 			GameObject.Find ("/Player").GetComponent<ControlScript>().AddChicken(this.gameObject);
 			attached = true;
-			this.transform.Find("ValidationAudioCrow").audio.Play();
+			this.transform.Find("ValidationAudioCrow").GetComponent<AudioSource>().Play();
 		}
 	}
 
@@ -93,13 +121,20 @@ public class ChickenScript : MonoBehaviour {
 			attached = false;
 			count = 1;
 			Destroy (joint);
+			this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			this.GetComponent<Rigidbody>().mass = float.MaxValue;
+		}
+		if (!hasBeenCounted)
+		{
+			hasBeenCounted = true;
+			count = 1;
 		}
 		return count;
 	}
 
 	public bool HasBeenFound()
 	{
-		return (target != null) && !attached;
+		return (target != null) && !attached && hasBeenCounted;
 	}
 
 	public void SetFound(GameObject player, Vector3 pos)
@@ -107,14 +142,16 @@ public class ChickenScript : MonoBehaviour {
 		target = player;
 		attached = false;
 		this.transform.position = pos;
+		hasBeenCounted = true;
+		this.GetComponent<Rigidbody>().mass = float.MaxValue;
 	}
 
 	void OnMouseDown()
 	{
 		if (Time.time > lastTwitteringTimer+0.5f)
 		{
-			this.transform.Find("ValidationAudioCrow").audio.Stop();
-			this.transform.Find("ValidationAudioCrow").audio.Play();
+			this.transform.Find("ValidationAudioCrow").GetComponent<AudioSource>().Stop();
+			this.transform.Find("ValidationAudioCrow").GetComponent<AudioSource>().Play();
 			this.GetComponent<Animator>().SetBool("twiterring", true);
 			lastTwitteringTimer = Time.time;
 		}

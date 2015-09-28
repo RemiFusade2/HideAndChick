@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 830eabd34b04ff24c99d850d7fd1bd53
+timeCreated: 1443090082
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - gaugeRawImage: {instanceID: 0}
+  - gaugeImage0: {fileID: 2800000, guid: 4e69a7212e6e9994b81871473e6003fc, type: 3}
+  - gaugeImage1: {fileID: 2800000, guid: 9a9e248bdb37f5047b4e2d758b116782, type: 3}
+  - gaugeImage2: {fileID: 2800000, guid: 5f8c967cfe2307345bb1449bf5d113b7, type: 3}
+  - gaugeImage3: {fileID: 2800000, guid: 3ec8b21bbab83894c9c2adc9ea464b6e, type: 3}
+  - gaugeImage4: {fileID: 2800000, guid: 43751f053fc7c624bac2dfe4316741fc, type: 3}
+  - lvlUpText: {instanceID: 0}
+  - levelText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

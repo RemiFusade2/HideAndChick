@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class PoulaillerScript : MonoBehaviour {
 
@@ -11,12 +11,13 @@ public class PoulaillerScript : MonoBehaviour {
 	public List<GameObject> objectsToHideAfterEnd;
 	public List<GameObject> objectsToShowAfterEnd;
 
-	public List<GameObject> objectsFRToShowAfterEnd;
-	public List<GameObject> objectsENToShowAfterEnd;
-
 	public Material skyboxToShowAfterEnd;
 
-	public string language;
+	public MenuEngine menuEngine;
+
+	public bool debug;
+
+	public ControlScript player;
 
 	public int GetPouletsRecuperes()
 	{
@@ -37,7 +38,10 @@ public class PoulaillerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		DebugChicksCountChange ();
+		if (debug)
+		{
+			DebugChicksCountChange ();
+		}
 	}
 
 	void DebugChicksCountChange()
@@ -53,6 +57,8 @@ public class PoulaillerScript : MonoBehaviour {
 			UpdateRemainingChicksText();
 		}
 	}
+
+	public int xpForOneChick;
 
 	void OnTriggerEnter(Collider col)
 	{
@@ -75,49 +81,50 @@ public class PoulaillerScript : MonoBehaviour {
 		}
 		if (count != 0)
 		{
+			player.AddXP(count*xpForOneChick);
 			pouletsRecuperes += count;
-			this.transform.Find("Validation").audio.Play();
+			this.transform.Find("Validation").GetComponent<AudioSource>().Play();
 			UpdateRemainingChicksText();
 			CheckForEnding();
 		}
 	}
 
+	public TextMesh remainingChicksText;
+
 	public void UpdateRemainingChicksText()
 	{
 		int pouletsRestants = pouletsTotal - pouletsRecuperes;
-		GameObject remainingChicksText = GameObject.Find("Maison/RemainingChicksText");
-		TextMeshPro textScript = remainingChicksText.GetComponent<TextMeshPro>();
 		if (pouletsRestants <= 0)
 		{
-			if (language == "FR")
+			if (menuEngine.getLanguage().Equals("FR"))
 			{
-				textScript.text = "Felicitations! Tu as trouve tous les poussins!";
+				remainingChicksText.text = "Felicitations!\nTu as trouvé tous les poussins!";
 			}
 			else
 			{
-				textScript.text = "Congratulations! You found all the chicks!";
+				remainingChicksText.text = "Congratulations!\nYou found all the chicks!";
 			}
 		} 
 		else if (pouletsRestants == 1)
 		{
-			if (language == "FR")
+			if (menuEngine.getLanguage().Equals("FR"))
 			{
-				textScript.text = "Plus qu'un poussin a trouver!";
+				remainingChicksText.text = "Plus qu'un poussin à trouver!";
 			}
 			else
 			{
-				textScript.text = "One remaining chick!";
+				remainingChicksText.text = "One remaining chick!";
 			}
 		}
 		else
 		{
-			if (language == "FR")
+			if (menuEngine.getLanguage().Equals("FR"))
 			{
-				textScript.text = "Poussins restants: " + pouletsRestants;
+				remainingChicksText.text = "Poussins restants: " + pouletsRestants;
 			}
 			else
 			{
-				textScript.text = "Remaining chicks: " + pouletsRestants;
+				remainingChicksText.text = "Remaining chicks: " + pouletsRestants;
 			}
 		}
 	}
@@ -134,22 +141,9 @@ public class PoulaillerScript : MonoBehaviour {
 			{
 				obj.SetActive(true);
 			}
-			if (language == "FR")
-			{
-				foreach (GameObject obj in this.objectsFRToShowAfterEnd)
-				{
-					obj.SetActive(true);
-				}
-			}
-			else
-			{
-				foreach (GameObject obj in this.objectsENToShowAfterEnd)
-				{
-					obj.SetActive(true);
-				}
-			}
+			RenderSettings.skybox = skyboxToShowAfterEnd;
+			RenderSettings.fog = false;
+			menuEngine.ShowEndingMenu();
 		}
-		RenderSettings.skybox = skyboxToShowAfterEnd;
-		RenderSettings.fog = false;
 	}
 }

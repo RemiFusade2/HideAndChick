@@ -1,35 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MiniMapBehaviour : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject playerToken;
 
-	public Renderer fogOfWar;
+	public GameObject poulailler;
+	public GameObject poulaillerToken;
+	
+	public List<GameObject> poussins;
+	private List<GameObject> poussinsTokens;
+	public GameObject poussinsTokensContainer;
+	public GameObject poussinTokenPrefab;
+
 	private Texture2D fogTexture;
+	public RawImage warFogImage;
+	
+	public Texture2D getFogTexture()  
+	{
+		return fogTexture;
+	}
+	public void setFogTexture(Texture2D newTexture)  
+	{
+		fogTexture = newTexture;
+		warFogImage.texture = fogTexture;
+	}
 
 	public int fogTextureResolution;
-
-	public GameObject poulailler;
-
-
-	public List<GameObject> poussins;
-	public List<GameObject> poussinsTokens;
-
-	public bool big;
 
 	// Use this for initialization
 	void Start () 
 	{
-		float z = this.transform.localPosition.z;
-		float y = this.transform.localPosition.y;
-		
-		Vector3 leftPosition = this.transform.parent.camera.ScreenToWorldPoint (new Vector3 (0, Screen.height-30, z));
-		
-		this.transform.localPosition = new Vector3(leftPosition.x+0.2f, y, z);
+		InitPoussinsPositions ();
+		InitPoulaillerPosition ();
+	}
 
+	public void ResetWarFog()
+	{
+		InitWarFog ();
+	}
+
+	private void InitWarFog()
+	{
 		fogTexture = new Texture2D(fogTextureResolution,fogTextureResolution);
 		for (int i = 0 ; i < fogTexture.width ; i++)
 		{			
@@ -39,7 +54,7 @@ public class MiniMapBehaviour : MonoBehaviour {
 			}
 		}
 		fogTexture.Apply ();
-		fogOfWar.material.mainTexture = fogTexture;
+		warFogImage.texture = fogTexture;
 	}
 	
 	// Update is called once per frame
@@ -52,30 +67,41 @@ public class MiniMapBehaviour : MonoBehaviour {
 
 	void UpdatePlayerPosition()
 	{
+		float minX = -76;
+		float maxX = 76;
+		float minY = -76;
+		float maxY = 76;
+
 		Vector3 playerPos = player.transform.position;
-		Vector3 playerTokenPos = playerPos * 5 / 1000;
-		playerToken.transform.localPosition = new Vector3 (playerTokenPos.x, playerToken.transform.localPosition.y, playerTokenPos.z);
+		Vector3 playerTokenPos = (playerPos + Vector3.one * 1000) / 2000 ;
+		playerToken.GetComponent<RectTransform> ().localPosition = new Vector3 (minX+playerTokenPos.x*(maxX-minX), minY+playerTokenPos.z*(maxY-minY), 0);
 	}
 
 	void UpdateFogOfWar()
 	{
 		int visibility = fogTextureResolution/10; // en pixels
 		Vector3 playerPos = player.transform.position;
-		Vector3 playerTokenPos = playerPos * 5 / 1000;
-		int playerPosInFogTexture_x = Mathf.FloorToInt (((5 - playerTokenPos.x) / 10.0f) * fogTexture.width);
-		int playerPosInFogTexture_y = Mathf.FloorToInt (((5 - playerTokenPos.z) / 10.0f) * fogTexture.height);
+		Vector3 playerTokenPos = (playerPos + Vector3.one * 1000) / 2000 ;
+		int playerPosInFogTexture_x = Mathf.FloorToInt (playerTokenPos.x * fogTexture.width);
+		int playerPosInFogTexture_y = Mathf.FloorToInt (playerTokenPos.z * fogTexture.height);
 
 		int x, y;
-		for (int i = - visibility ; i < visibility ; i++)
+		Color fullTransparent = new Color (0, 0, 0, 0);
+		Color halfTransparent = new Color (0, 0, 0, 0.3f);
+		for (int i = - visibility - 3 ; i < visibility + 3 ; i++)
 		{
 			x = playerPosInFogTexture_x + i;
-			for (int j = - visibility ; j < visibility ; j++)
+			for (int j = - visibility - 3 ; j < visibility + 3 ; j++)
 			{
 				y = playerPosInFogTexture_y + j;
 				float dist = i*i + j*j;
-				if (x >= 0 && x < fogTexture.width && y >= 0 && y < fogTexture.height && dist < visibility*visibility)
+				if (x >= 0 && x < fogTexture.width && y >= 0 && y < fogTexture.height && dist <= visibility*visibility)
 				{
-					fogTexture.SetPixel (x, y, new Color (0, 0, 0, 0));
+					fogTexture.SetPixel (x, y, fullTransparent);
+				}
+				else if (x >= 0 && x < fogTexture.width && y >= 0 && y < fogTexture.height && dist <= (visibility*visibility+100))
+				{
+					fogTexture.SetPixel (x, y, halfTransparent);
 				}
 			}
 		}
@@ -89,17 +115,38 @@ public class MiniMapBehaviour : MonoBehaviour {
 		{
 			GameObject poussinToken = poussinsTokens[index];
 
+			float minX = -76;
+			float maxX = 76;
+			float minY = -76;
+			float maxY = 76;
+			
 			Vector3 poussinPos = poussin.transform.position;
-			Vector3 poussinTokenPos = poussinPos * 5 / 1000;
-			poussinToken.transform.localPosition = new Vector3 (poussinTokenPos.x, poussinToken.transform.localPosition.y, poussinTokenPos.z);
+			Vector3 poussinTokenPos = (poussinPos + Vector3.one * 1000) / 2000 ;
+			poussinToken.GetComponent<RectTransform> ().localPosition = new Vector3 (minX+poussinTokenPos.x*(maxX-minX), minY+poussinTokenPos.z*(maxY-minY), 0);
 
 			index++;
 		}
 	}
 
-	void OnMouseDown()
+	private void InitPoussinsPositions()
 	{
-		big = !big;
-		this.GetComponent<Animator> ().SetBool ("big", big);
+		poussinsTokens = new List<GameObject> ();
+		for (int i = 0 ; i < poussins.Count ; i++)
+		{
+			GameObject poussinToken = (GameObject) Instantiate(poussinTokenPrefab);
+			poussinToken.transform.SetParent ( poussinsTokensContainer.transform );
+			poussinsTokens.Add (poussinToken);
+		}
+	}
+	
+	private void InitPoulaillerPosition()
+	{
+		float minX = -76;
+		float maxX = 76;
+		float minY = -76;
+		float maxY = 76;		
+		Vector3 poulaillerPos = poulailler.transform.position;
+		Vector3 poulaillerTokenPos = (poulaillerPos + Vector3.one * 1000) / 2000 ;
+		poulaillerToken.GetComponent<RectTransform> ().localPosition = new Vector3 (minX+poulaillerTokenPos.x*(maxX-minX), minY+poulaillerTokenPos.z*(maxY-minY), 0);
 	}
 }

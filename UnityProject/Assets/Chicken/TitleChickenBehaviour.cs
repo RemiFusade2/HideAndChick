@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TMPro;
 
 public class TitleChickenBehaviour : MonoBehaviour {
 
@@ -16,14 +15,14 @@ public class TitleChickenBehaviour : MonoBehaviour {
 	public float ChickenStartTime;
 	public float ChickenEndTime;
 
-	private int ENJMINAlpha;
-	private int TitleAlpha;
+	//private int ENJMINAlpha;
+	//private int TitleAlpha;
 
 	// Use this for initialization
 	void Start () {
 		timer = Time.time;
-		ENJMINAlpha = 0;
-		TitleAlpha = 0;
+		/*ENJMINAlpha = 0;
+		TitleAlpha = 0;*/
 	}
 	
 	// Update is called once per frame
@@ -65,7 +64,7 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			meshscript = GameObject.Find("ExploreText").GetComponent<TextMeshPro>();
 			c = new Color32(255,255,255,255);
 			meshscript.color = c;
-		}*/
+		}
 		else if (Time.time > timer + 24.5f)
 		{
 			TextMeshPro meshscript = GameObject.Find("FindingChicksText").GetComponent<TextMeshPro>();
@@ -89,13 +88,13 @@ public class TitleChickenBehaviour : MonoBehaviour {
 		}
 		else if (Time.time > timer + ChickenEndTime)
 		{
-			this.rigidbody.useGravity = false;
+			this.GetComponent<Rigidbody>().useGravity = false;
 			this.enabled = false;
 		}
 		else if (Time.time > timer + ChickenStartTime)
 		{
-			this.rigidbody.useGravity = true;
-			this.rigidbody.velocity = new Vector3 (initSpeedX, initSpeedY, initSpeedZ);
+			this.GetComponent<Rigidbody>().useGravity = true;
+			this.GetComponent<Rigidbody>().velocity = new Vector3 (initSpeedX, initSpeedY, initSpeedZ);
 			//this.rigidbody.angularVelocity = new Vector3 (0, 100, 0);
 		}
 		else if (Time.time > timer + TitleFadeInTime)
@@ -139,9 +138,6 @@ public class TitleChickenBehaviour : MonoBehaviour {
 			c = new Color32(255,255,255,255);
 			meshscript.color = c;
 		}
-
-
-
-
+*/
 	}
 }

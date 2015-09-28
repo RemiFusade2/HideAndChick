@@ -19,7 +19,7 @@ public class DoorScript : MonoBehaviour {
 	{
 		if (firstCol)
 		{
-			this.transform.Find ("AudioSource").audio.Play ();
+			this.transform.Find ("AudioSource").GetComponent<AudioSource>().Play ();
 		}
 		firstCol = true;
 	}

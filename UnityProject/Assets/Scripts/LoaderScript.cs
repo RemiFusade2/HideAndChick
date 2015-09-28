@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using System;
 
 public class LoaderScript : MonoBehaviour {
 
@@ -10,103 +10,152 @@ public class LoaderScript : MonoBehaviour {
 	public GameObject TriggerPoulailler;
 
 	public GameObject player;
-
-	public GameObject InfoText;
-
-	public string language;
+	public CameraScript playerCamera;
 		
 	private bool gameInit = false;
 
-	private bool quitting = false;
-	private float exitTimer = 0;
+	public bool IsGameInit()
+	{
+		return gameInit;
+	}
+
+	private const string userPrefsChicksFound = "HideAndChickChicksFoundCount";
+	private const string userPrefsChicksData = "HideAndChickChicksData";
+	
+	private const string userPrefsPlayerPositionX = "HideAndChickPlayerPositionX";
+	private const string userPrefsPlayerPositionY = "HideAndChickPlayerPositionY";
+	private const string userPrefsPlayerPositionZ = "HideAndChickPlayerPositionZ";
+	
+	private const string userPrefsPlayerXP = "HideAndChickPlayerXP";
 
 	// Use this for initialization
 	void Start () 
 	{
-
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			if (!gameInit)
-			{
-				Application.Quit();				
-			}
-			if (gameInit && !quitting)
-			{
-				string message = (language=="FR")?"Sauvegarde en cours...\nA bientot!":"Saving...\nGood bye!";
-				TextMeshPro textScript = InfoText.GetComponent<TextMeshPro>();
-				textScript.text = message;
-				textScript.renderer.castShadows = false;
-				SaveGame();
-				quitting = true;
-				exitTimer = Time.time;
-			}
-		}
-		if (quitting && Time.time > exitTimer+1)
-		{
-			Application.Quit();
-		}
+		// PlayerPrefs.DeleteAll ();
 	}
 
 	public bool HasGameData()
 	{
-		return PlayerPrefs.HasKey ("PouletsRecuperes") && PlayerPrefs.GetInt ("PouletsRecuperes") > 0;
+		return PlayerPrefs.HasKey (userPrefsPlayerPositionX);
 	}
 
 	public void InitGame(bool newGame)
 	{
-		if (!newGame)
+		if (!newGame && HasGameData())
 		{
+			miniMapScript.ResetWarFog();
 			LoadGame();
 		}
 		else
 		{
 			TriggerPoulailler.GetComponent<PoulaillerScript>().SetPouletsRecuperes(0);
+			player.transform.localPosition = new Vector3(0,2.1f,0);
+			playerCamera.UpdatePosition();
+			miniMapScript.ResetWarFog();
 		}
 		gameInit = true;
 	}
 
-	private void SaveGame()
+	public void SaveGame()
 	{
+		// Save Player XP
+		PlayerPrefs.SetInt (userPrefsPlayerXP, player.GetComponent<ControlScript>().GetXPGained());
+
+		// Save Player position
+		PlayerPrefs.SetFloat (userPrefsPlayerPositionX, player.transform.localPosition.x);
+		PlayerPrefs.SetFloat (userPrefsPlayerPositionY, player.transform.localPosition.y);
+		PlayerPrefs.SetFloat (userPrefsPlayerPositionZ, player.transform.localPosition.z);
+
+		// Save Chicks founds
 		int index = 0;
 		foreach (GameObject chicken in chickensList)
 		{
-			string key = "Poulet"+index;
+			string key = userPrefsChicksData+index;
 			ChickenScript script = chicken.GetComponent<ChickenScript>();
 			PlayerPrefs.SetString(key, script.HasBeenFound().ToString());
 			index++;
 		}
 		PoulaillerScript poulaillerScript = TriggerPoulailler.GetComponent<PoulaillerScript>();
-		PlayerPrefs.SetInt ("PouletsRecuperes", poulaillerScript.GetPouletsRecuperes ());
+		PlayerPrefs.SetInt (userPrefsChicksFound, poulaillerScript.GetPouletsRecuperes ());
+
+		// Save Mini map
+		SaveTexture(miniMapScript.getFogTexture(), miniMapTextureFileName);
+
 		PlayerPrefs.Save ();
 	}
 	
 	private void LoadGame()
 	{
+		// Load Player XP
+		player.GetComponent<ControlScript> ().SetXP (PlayerPrefs.GetInt (userPrefsPlayerXP));
+
+		// Load Player position
+		Vector3 newPlayerPosition = new Vector3 (PlayerPrefs.GetFloat (userPrefsPlayerPositionX), 
+		                                         PlayerPrefs.GetFloat (userPrefsPlayerPositionY),
+		                                         PlayerPrefs.GetFloat (userPrefsPlayerPositionZ));
+		player.transform.localPosition = newPlayerPosition;
+
+		// Load chicks found
 		int index = 0;
 		float x = 0;
 		float y = 3;
 		float z = -3;
+		float deltaY = 3;
 		foreach (GameObject chicken in chickensList)
 		{
-			string key = "Poulet"+index;
+			string key = userPrefsChicksData+index;
 			if (PlayerPrefs.HasKey(key) && PlayerPrefs.GetString(key) == "True")
 			{
 				ChickenScript script = chicken.GetComponent<ChickenScript>();
 				Vector3 pos = new Vector3(x,y,z);
 				script.SetFound(player, pos);
-				y += 1.5f;
+				y += deltaY;
 			}
 			index++;
 		}
-		if (PlayerPrefs.HasKey("PouletsRecuperes"))
+		if (PlayerPrefs.HasKey(userPrefsChicksFound))
 		{
 			PoulaillerScript poulaillerScript = TriggerPoulailler.GetComponent<PoulaillerScript>();
-			poulaillerScript.SetPouletsRecuperes (PlayerPrefs.GetInt ("PouletsRecuperes"));
+			poulaillerScript.SetPouletsRecuperes (PlayerPrefs.GetInt (userPrefsChicksFound));
 		}
+
+		// Load Mini map
+		Texture2D miniMapTexture = RetrieveTexture (miniMapTextureFileName);
+		miniMapScript.setFogTexture (miniMapTexture);
+	}
+
+	// Minimap texture
+	public MiniMapBehaviour miniMapScript;
+	WWW www;
+	private const string miniMapTextureFileName = "HideAndChickMiniMapFog";
+		
+	private void SaveTexture(Texture2D textureToSave, string saveAs)
+	{
+		Texture2D tex;
+		byte[] byteArray;
+
+		tex = textureToSave;
+		byteArray = tex.EncodeToPNG();
+		
+		string temp = Convert.ToBase64String(byteArray);
+		
+		PlayerPrefs.SetString(saveAs,temp);      /// save it to file if u want.
+		PlayerPrefs.SetInt(saveAs+"_w",tex.width);
+		PlayerPrefs.SetInt(saveAs+"_h",tex.height);
+	}
+	
+	private Texture2D RetrieveTexture(string savedImageName)
+	{
+		string temp=PlayerPrefs.GetString(savedImageName);
+		
+		int width=PlayerPrefs.GetInt(savedImageName+"_w");
+		int height=PlayerPrefs.GetInt(savedImageName+"_h");
+		
+		byte[] byteArray= Convert.FromBase64String(temp);
+		
+		Texture2D tex = new Texture2D(width,height);
+		
+		tex.LoadImage(byteArray);
+		return tex;		
 	}
 }

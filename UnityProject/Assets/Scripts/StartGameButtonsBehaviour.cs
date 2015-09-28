@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TMPro;
 
 public class StartGameButtonsBehaviour : MonoBehaviour {
 
-	static bool waitForInput = true;
+	//static bool waitForInput = true;
 
 	public bool newGame;
 
@@ -25,7 +24,7 @@ public class StartGameButtonsBehaviour : MonoBehaviour {
 	void Update () {
 	
 	}
-
+	/*
 	void OnMouseDown()
 	{
 		if (waitForInput)
@@ -41,4 +40,5 @@ public class StartGameButtonsBehaviour : MonoBehaviour {
 			waitForInput = false;
 		}
 	}
+	 */
 }

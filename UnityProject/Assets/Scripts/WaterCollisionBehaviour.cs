@@ -19,7 +19,7 @@ public class WaterCollisionBehaviour : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player")
 		{
-			col.transform.Find ("WaterWalkAudio").audio.Play();
+			col.transform.Find ("WaterWalkAudio").GetComponent<AudioSource>().Play();
 		}
 	}
 	
@@ -27,7 +27,7 @@ public class WaterCollisionBehaviour : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player")
 		{
-			col.transform.Find ("WaterWalkAudio").audio.Stop();
+			col.transform.Find ("WaterWalkAudio").GetComponent<AudioSource>().Stop();
 		}
 	}
 }
